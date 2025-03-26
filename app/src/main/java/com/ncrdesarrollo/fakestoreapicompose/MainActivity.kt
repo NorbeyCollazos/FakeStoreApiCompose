@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.ncrdesarrollo.fakestoreapicompose.core.navigation.NavigationWrapper
 import com.ncrdesarrollo.fakestoreapicompose.products.ui.ProductsScreen
 import com.ncrdesarrollo.fakestoreapicompose.products.ui.ProductsViewModel
 import com.ncrdesarrollo.fakestoreapicompose.ui.theme.FakeStoreApiComposeTheme
@@ -29,10 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FakeStoreApiComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ProductsScreen(
-                        viewModel = viewModel,
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    NavigationWrapper(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

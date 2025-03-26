@@ -1,7 +1,11 @@
 package com.ncrdesarrollo.fakestoreapicompose.products.ui
 
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.ncrdesarrollo.fakestoreapicompose.core.navigation.ProductView
 import com.ncrdesarrollo.fakestoreapicompose.products.domain.IProductsInteractor
 import com.ncrdesarrollo.fakestoreapicompose.products.ui.models.ProductsData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,7 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductsViewModel @Inject constructor(private val interactor: IProductsInteractor) : ViewModel() {
+class ProductsViewModel @Inject constructor(
+    private val interactor: IProductsInteractor
+) : ViewModel() {
 
     private var _productsList = MutableStateFlow<List<ProductsData>>(listOf())
     var productsList: StateFlow<List<ProductsData>> = _productsList
@@ -21,4 +27,6 @@ class ProductsViewModel @Inject constructor(private val interactor: IProductsInt
             _productsList.value = interactor.getAllProducts()
         }
     }
+
+
 }

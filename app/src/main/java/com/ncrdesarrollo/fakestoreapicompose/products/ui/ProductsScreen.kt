@@ -14,22 +14,28 @@ import androidx.compose.ui.unit.dp
 import com.ncrdesarrollo.fakestoreapicompose.products.ui.models.ProductsData
 
 @Composable
-fun ProductsScreen(viewModel: ProductsViewModel, modifier: Modifier){
+fun ProductsScreen(
+    viewModel: ProductsViewModel,
+    modifier: Modifier,
+    navigateToProductView: (Int) -> Unit
+) {
     viewModel.getAllProducts()
     val productsList by viewModel.productsList.collectAsState()
-    ProductList(productsList, modifier)
+    ProductList(productsList, modifier) {
+        navigateToProductView(it)
+    }
 }
 
 @Composable
-fun ProductList(products: List<ProductsData>, modifier: Modifier) {
+fun ProductList(products: List<ProductsData>, modifier: Modifier, onclickCard: (Int) -> Unit) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(products) { product ->
-            ProductItem(product = product) {
-                Log.i("idProduct", it.toString())
+            ProductItem(product = product) { idProduct ->
+                onclickCard(idProduct)
             }
         }
     }

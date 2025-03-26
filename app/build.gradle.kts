@@ -5,6 +5,8 @@ plugins {
 
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
+    alias(libs.plugins.jetbrainsKotlinSerialization)
 }
 
 android {
@@ -81,5 +83,12 @@ dependencies {
     // for ROOM
     implementation ("androidx.room:room-ktx:2.6.1")
     kapt ("androidx.room:room-compiler:2.6.1")
+
+    // for navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    // for inject viewModel in Navigation
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 }
