@@ -1,5 +1,6 @@
 package com.ncrdesarrollo.fakestoreapicompose.products.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +31,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.ncrdesarrollo.fakestoreapicompose.R
 import com.ncrdesarrollo.fakestoreapicompose.products.ui.models.ProductViewData
+import com.ncrdesarrollo.fakestoreapicompose.products.ui.models.UiState
 
 @Composable
 fun ProductViewScreen(
@@ -36,10 +39,31 @@ fun ProductViewScreen(
     modifier: Modifier,
     navigateToBack: () -> Unit
 ) {
-    viewModel.getProductView()
+    val context = LocalContext.current
     val dataProduct by viewModel.productDataModel.collectAsState()
-    Column(modifier = modifier.padding()) {
-        ProductDetailScreen(dataProduct)
+    when (val state = dataProduct) {
+        UiState.Empty -> {}
+        is UiState.Error -> {
+            Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+        }
+
+        UiState.Loading -> CenterLoading()
+        is UiState.Success -> {
+            Column(modifier = modifier.padding()) {
+                ProductDetailScreen(product = state.data)
+            }
+        }
+    }
+
+}
+
+@Composable
+private fun CenterLoading() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
     }
 }
 
