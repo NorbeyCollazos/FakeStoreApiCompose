@@ -6,4 +6,6 @@ import retrofit2.Response
 interface IProductsDataSource {
 
     suspend fun getAllProducts(): Response<ResponseBody>
+
+    suspend fun getDataProductById(productId: Int): Response<ResponseBody>
 }

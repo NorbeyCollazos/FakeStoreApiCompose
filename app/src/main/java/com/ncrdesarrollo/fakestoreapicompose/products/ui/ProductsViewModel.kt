@@ -1,11 +1,7 @@
 package com.ncrdesarrollo.fakestoreapicompose.products.ui
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
-import com.ncrdesarrollo.fakestoreapicompose.core.navigation.ProductView
 import com.ncrdesarrollo.fakestoreapicompose.products.domain.IProductsInteractor
 import com.ncrdesarrollo.fakestoreapicompose.products.ui.models.ProductsData
 import dagger.hilt.android.lifecycle.HiltViewModel

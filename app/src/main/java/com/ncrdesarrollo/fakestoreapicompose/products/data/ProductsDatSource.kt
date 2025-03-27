@@ -8,4 +8,8 @@ class ProductsDatSource @Inject constructor(private val apiService: ProductsApiS
     override suspend fun getAllProducts(): Response<ResponseBody> {
         return apiService.getAllProducts()
     }
+
+    override suspend fun getDataProductById(productId: Int): Response<ResponseBody> {
+        return apiService.getDataProductById(productId)
+    }
 }

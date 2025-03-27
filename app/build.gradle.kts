@@ -91,4 +91,7 @@ dependencies {
     // for inject viewModel in Navigation
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    // Para cargar imágenes desde URL
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
 }
